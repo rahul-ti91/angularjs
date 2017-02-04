@@ -1,0 +1,915 @@
+<!-- page content -->
+<div class="right_col" role="main" style="margin-left:-2%">
+    <div class="">
+
+        <span class="row" id="graphType" style="padding: 15px;">
+        Select Report :
+            <select>
+            <option>First</option>
+            <option>Second</option>
+            <option>Third</option>
+            </select>
+             <button>Download MSR</button>
+        <button>Show Defaulters</button>
+        </span>
+        
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Line Graph</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_line" style="height:350px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Completion Status</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_mini_pie" style="height:350px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Bar Graph</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="mainb" style="height:350px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Pie Graph</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_pie" style="height:350px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Pie Area</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li class="dropdown">
+                                <select>
+                                <option>Capital Markets</option>
+                                 <option>Products</option>
+                                 <option>Finance</option>
+                                 <option>Compliance</option>
+                                 <option>Risk</option>
+                                 <option>Equity</option>
+                                 <option>HR</option>
+                                </select>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_pie2" style="height:350px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Horizontal Bar</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_bar_horizontal" style="height:370px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Sonar</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_sonar" style="height:370px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+
+<script>
+    var theme = {
+        color: [
+            '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+            '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+        ],
+
+        title: {
+            itemGap: 8,
+            textStyle: {
+                fontWeight: 'normal',
+                color: '#408829'
+            }
+        },
+
+        dataRange: {
+            color: ['#1f610a', '#97b58d']
+        },
+
+        toolbox: {
+            color: ['#408829', '#408829', '#408829', '#408829']
+        },
+
+        tooltip: {
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            axisPointer: {
+                type: 'line',
+                lineStyle: {
+                    color: '#408829',
+                    type: 'dashed'
+                },
+                crossStyle: {
+                    color: '#408829'
+                },
+                shadowStyle: {
+                    color: 'rgba(200,200,200,0.3)'
+                }
+            }
+        },
+
+        dataZoom: {
+            dataBackgroundColor: '#eee',
+            fillerColor: 'rgba(64,136,41,0.2)',
+            handleColor: '#408829'
+        },
+        grid: {
+            borderWidth: 0
+        },
+
+        categoryAxis: {
+            axisLine: {
+                lineStyle: {
+                    color: '#408829'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: ['#eee']
+                }
+            }
+        },
+
+        valueAxis: {
+            axisLine: {
+                lineStyle: {
+                    color: '#408829'
+                }
+            },
+            splitArea: {
+                show: true,
+                areaStyle: {
+                    color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: ['#eee']
+                }
+            }
+        },
+        timeline: {
+            lineStyle: {
+                color: '#408829'
+            },
+            controlStyle: {
+                normal: {
+                    color: '#408829'
+                },
+                emphasis: {
+                    color: '#408829'
+                }
+            }
+        },
+
+        k: {
+            itemStyle: {
+                normal: {
+                    color: '#68a54a',
+                    color0: '#a9cba2',
+                    lineStyle: {
+                        width: 1,
+                        color: '#408829',
+                        color0: '#86b379'
+                    }
+                }
+            }
+        },
+        map: {
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        color: '#ddd'
+                    },
+                    label: {
+                        textStyle: {
+                            color: '#c12e34'
+                        }
+                    }
+                },
+                emphasis: {
+                    areaStyle: {
+                        color: '#99d2dd'
+                    },
+                    label: {
+                        textStyle: {
+                            color: '#c12e34'
+                        }
+                    }
+                }
+            }
+        },
+        force: {
+            itemStyle: {
+                normal: {
+                    linkStyle: {
+                        strokeColor: '#408829'
+                    }
+                }
+            }
+        },
+        chord: {
+            padding: 4,
+            itemStyle: {
+                normal: {
+                    lineStyle: {
+                        width: 1,
+                        color: 'rgba(128, 128, 128, 0.5)'
+                    },
+                    chordStyle: {
+                        lineStyle: {
+                            width: 1,
+                            color: 'rgba(128, 128, 128, 0.5)'
+                        }
+                    }
+                },
+                emphasis: {
+                    lineStyle: {
+                        width: 1,
+                        color: 'rgba(128, 128, 128, 0.5)'
+                    },
+                    chordStyle: {
+                        lineStyle: {
+                            width: 1,
+                            color: 'rgba(128, 128, 128, 0.5)'
+                        }
+                    }
+                }
+            }
+        },
+        textStyle: {
+            fontFamily: 'Arial, Verdana, sans-serif'
+        }
+    };
+
+    var echartBar = echarts.init(document.getElementById('mainb'), theme);
+
+    echartBar.setOption({
+        title: {
+            text: 'Graph title',
+            subtext: 'Graph Sub-text'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['sales', 'purchases']
+        },
+        toolbox: {
+            show: false
+        },
+        calculable: false,
+        xAxis: [{
+            type: 'category',
+            data: ['1?', '2?', '3?', '4?', '5?', '6?', '7?', '8?', '9?', '10?', '11?', '12?']
+        }],
+        yAxis: [{
+            type: 'value'
+        }],
+        series: [{
+            name: 'sales',
+            type: 'bar',
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            markPoint: {
+                data: [{
+                    type: 'max',
+                    name: '???'
+                }, {
+                    type: 'min',
+                    name: '???'
+                }]
+            },
+            markLine: {
+                data: [{
+                    type: 'average',
+                    name: '???'
+                }]
+            }
+        }, {
+            name: 'purchases',
+            type: 'bar',
+            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            markPoint: {
+                data: [{
+                    name: 'sales',
+                    value: 182.2,
+                    xAxis: 7,
+                    yAxis: 183,
+                }, {
+                    name: 'purchases',
+                    value: 2.3,
+                    xAxis: 11,
+                    yAxis: 3
+                }]
+            },
+            markLine: {
+                data: [{
+                    type: 'average',
+                    name: '???'
+                }]
+            }
+        }]
+    });
+
+    var echartRadar = echarts.init(document.getElementById('echart_sonar'), theme);
+
+    echartRadar.setOption({
+        title: {
+            text: 'Budget vs spending',
+            subtext: 'Subtitle'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            y: 'bottom',
+            data: ['Allocated Budget', 'Actual Spending']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                restore: {
+                    show: true,
+                    title: "Restore"
+                },
+                saveAsImage: {
+                    show: true,
+                    title: "Save Image"
+                }
+            }
+        },
+        polar: [{
+            indicator: [{
+                text: 'Sales',
+                max: 6000
+            }, {
+                text: 'Administration',
+                max: 16000
+            }, {
+                text: 'Information Techology',
+                max: 30000
+            }, {
+                text: 'Customer Support',
+                max: 38000
+            }, {
+                text: 'Development',
+                max: 52000
+            }, {
+                text: 'Marketing',
+                max: 25000
+            }]
+        }],
+        calculable: true,
+        series: [{
+            name: 'Budget vs spending',
+            type: 'radar',
+            data: [{
+                value: [4300, 10000, 28000, 35000, 50000, 19000],
+                name: 'Allocated Budget'
+            }, {
+                value: [5000, 14000, 28000, 31000, 42000, 21000],
+                name: 'Actual Spending'
+            }]
+        }]
+    });
+
+    var echartLine = echarts.init(document.getElementById('echart_line'), theme);
+
+    echartLine.setOption({
+        title: {
+            text: 'Line Graph',
+            subtext: 'Subtitle'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            x: 220,
+            y: 40,
+            data: ['Capital Markets', 'Product', 'Finance', 'Compliance', 'Risk', 'Equity', 'HR']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                magicType: {
+                    show: true,
+                    title: {
+                        line: 'Line',
+                        bar: 'Bar',
+                        stack: 'Stack',
+                        tiled: 'Tiled'
+                    },
+                    type: ['line', 'bar', 'stack', 'tiled']
+                },
+                restore: {
+                    show: true,
+                    title: "Restore"
+                },
+                saveAsImage: {
+                    show: true,
+                    title: "Save Image"
+                }
+            }
+        },
+        calculable: true,
+        xAxis: [{
+            type: 'category',
+            boundaryGap: false,
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        }],
+        yAxis: [{
+            type: 'value'
+        }],
+        series: [{
+            name: 'Capital Markets',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [10, 12, 21, 54, 260, 830, 710, 365, 12, 876, 254, 111]
+        }, {
+            name: 'Product',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [30, 182, 434, 791, 390, 30, 10, 21, 54, 260, 830, 710]
+        }, {
+            name: 'Finance',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [1320, 1132, 601, 234, 120, 90, 20, 30, 182, 434, 791, 390]
+        }, {
+            name: 'Compliance',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [120, 112, 601, 2394, 1200, 90, 209, 30, 182, 434, 71, 30]
+        }, {
+            name: 'Risk',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [220, 612, 201, 794, 900, 980, 209, 560, 182, 434, 71, 30]
+        }, {
+            name: 'Equity',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [2260, 612, 2401, 894, 600, 80, 2409, 860, 1182, 834, 371, 630]
+        }, {
+            name: 'HR',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+                normal: {
+                    areaStyle: {
+                        type: 'default'
+                    }
+                }
+            },
+            data: [620, 912, 901, 394, 700, 180, 809, 460, 482, 934, 751, 380]
+        }]
+    });
+
+    var echartBar = echarts.init(document.getElementById('echart_bar_horizontal'), theme);
+
+    echartBar.setOption({
+        title: {
+            text: 'Bar Graph',
+            subtext: 'Graph subtitle'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            x: 100,
+            data: ['2015', '2016']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {
+                    show: true,
+                    title: "Save Image"
+                }
+            }
+        },
+        calculable: true,
+        xAxis: [{
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        }],
+        yAxis: [{
+            type: 'category',
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+        }],
+        series: [{
+            name: '2015',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        }, {
+            name: '2016',
+            type: 'bar',
+            data: [19325, 23438, 31000, 121594, 134141, 681807]
+        }]
+    });
+
+    var echartPieCollapse = echarts.init(document.getElementById('echart_pie2'), theme);
+
+    echartPieCollapse.setOption({
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            x: 'center',
+            y: 'bottom',
+            data: ['rose1', 'rose2', 'rose3', 'rose4', 'rose5', 'rose6', 'rose7']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                magicType: {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore: {
+                    show: true,
+                    title: "Restore"
+                },
+                saveAsImage: {
+                    show: true,
+                    title: "Save Image"
+                }
+            }
+        },
+        calculable: true,
+        series: [{
+            name: 'Area Mode',
+            type: 'pie',
+            radius: [25, 90],
+            center: ['50%', 170],
+            roseType: 'area',
+            x: '50%',
+            max: 40,
+            sort: 'ascending',
+            data: [{
+                value: 10,
+                name: 'rose1'
+            }, {
+                value: 5,
+                name: 'rose2'
+            }, {
+                value: 15,
+                name: 'rose3'
+            }, {
+                value: 25,
+                name: 'rose4'
+            }, {
+                value: 20,
+                name: 'rose5'
+            }, {
+                value: 25,
+                name: 'rose6'
+            }, {
+                value: 10,
+                name: 'rose7'
+            }]
+        }]
+    });
+
+    var echartPie = echarts.init(document.getElementById('echart_pie'), theme);
+
+    echartPie.setOption({
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            x: 'center',
+            y: 'bottom',
+            data: ['Direct Access', 'E-mail Marketing', 'Union Ad', 'Video Ads', 'Search Engine']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                magicType: {
+                    show: true,
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            x: '25%',
+                            width: '50%',
+                            funnelAlign: 'left',
+                            max: 1548
+                        }
+                    }
+                },
+                restore: {
+                    show: true,
+                    title: "Restore"
+                },
+                saveAsImage: {
+                    show: true,
+                    title: "Save Image"
+                }
+            }
+        },
+        calculable: true,
+        series: [{
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '48%'],
+            data: [{
+                value: 335,
+                name: 'Direct Access'
+            }, {
+                value: 310,
+                name: 'E-mail Marketing'
+            }, {
+                value: 234,
+                name: 'Union Ad'
+            }, {
+                value: 135,
+                name: 'Video Ads'
+            }, {
+                value: 1548,
+                name: 'Search Engine'
+            }]
+        }]
+    });
+
+    var dataStyle = {
+        normal: {
+            label: {
+                show: false
+            },
+            labelLine: {
+                show: false
+            }
+        }
+    };
+
+    var placeHolderStyle = {
+        normal: {
+            color: 'rgba(0,0,0,0)',
+            label: {
+                show: false
+            },
+            labelLine: {
+                show: false
+            }
+        },
+        emphasis: {
+            color: 'rgba(0,0,0,0)'
+        }
+    };
+
+    var echartMiniPie = echarts.init(document.getElementById('echart_mini_pie'), theme);
+
+    echartMiniPie.setOption({
+        title: {
+            text: 'Chart #2',
+            subtext: 'From ExcelHome',
+            sublink: 'http://e.weibo.com/1341556070/AhQXtjbqh',
+            x: 'center',
+            y: 'center',
+            itemGap: 20,
+            textStyle: {
+                color: 'rgba(30,144,255,0.8)',
+                fontFamily: '微软雅黑',
+                fontSize: 35,
+                fontWeight: 'bolder'
+            }
+        },
+        tooltip: {
+            show: true,
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 170,
+            y: 45,
+            itemGap: 12,
+            data: ['68%Something #1', '29%Something #2', '3%Something #3'],
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {
+                    show: true
+                },
+                dataView: {
+                    show: true,
+                    title: "Text View",
+                    lang: [
+                        "Text View",
+                        "Close",
+                        "Refresh",
+                    ],
+                    readOnly: false
+                },
+                restore: {
+                    show: true,
+                    title: "Restore"
+                },
+                saveAsImage: {
+                    show: true,
+                    title: "Save Image"
+                }
+            }
+        },
+        series: [{
+            name: '1',
+            type: 'pie',
+            clockWise: false,
+            radius: [90, 115],
+            itemStyle: dataStyle,
+            data: [{
+                value: 68,
+                name: '68%Something #1'
+            }, {
+                value: 32,
+                name: 'invisible',
+                itemStyle: placeHolderStyle
+            }]
+        }, {
+            name: '2',
+            type: 'pie',
+            clockWise: false,
+            radius: [65, 90],
+            itemStyle: dataStyle,
+            data: [{
+                value: 29,
+                name: '29%Something #2'
+            }, {
+                value: 71,
+                name: 'invisible',
+                itemStyle: placeHolderStyle
+            }]
+        }, {
+            name: '3',
+            type: 'pie',
+            clockWise: false,
+            radius: [10, 65],
+            itemStyle: dataStyle,
+            data: [{
+                value: 3,
+                name: '3%Something #3'
+            }, {
+                value: 97,
+                name: 'invisible',
+                itemStyle: placeHolderStyle
+            }]
+        }]
+    });
+
+</script>

@@ -1,0 +1,251 @@
+<!-- page content -->
+<div class="right_col" role="main" style="margin-left:-2%">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+
+                    <div class="x_content">
+
+                        <div id='calendar'></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+
+<!-- calendar modal -->
+<div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">New Leave Entry</h4>
+            </div>
+            <div class="modal-body">
+                <div id="testmodal" style="padding: 5px 20px;">
+                    <form id="antoform" class="form-horizontal calender" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Leave Type</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="leaveType" name="leaveType">
+                        <option value="_PL">Planned Leave</option>
+                        <option value="#F57C00_Compoff">Compoff</option>
+                      </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Associate Name</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="descr" name="descr" />
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="col-sm-3 control-label">Backup Associate</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="descrb" name="descrb" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary antosubmit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel2">Edit Leave Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="testmodal2" style="padding: 5px 20px;">
+                    <form id="antoform2" class="form-horizontal calender" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Leave Type</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="leaveType2" name="title2">
+                        <option value="_PL">Planned Leave</option>
+                        <option value="#F57C00_Compoff">Compoff</option>
+                      </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Associate Name</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="descr2" name="descr2" />
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-sm-3 control-label">Backup Associate</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="descrb2" name="descrb2" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
+                <button type="button" class="btn btn-primary antodelete2">Delete Leave</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
+<div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
+<!-- /calendar modal -->
+
+
+<!-- FullCalendar -->
+<script>
+    var date = new Date(),
+        d = date.getDate(),
+        m = date.getMonth(),
+        y = date.getFullYear(),
+        started,
+        categoryClass;
+
+    calEvents = [];
+    if (globalData.leaves.length > 0) {
+        for (f = 0; f < globalData.leaves.length; f++) {
+            if (globalData.leaves[f].active) {
+                var filler = "";
+                var color = "";
+                if (globalData.leaves[f].type == "Planned Leave") {
+                    filler = "PL";
+                    color = "";
+                } else {
+                    filler = "Compoff";
+                    color = "#F57C00"
+                }
+                var event = {};
+                event.id = globalData.leaves[f].id;
+                event.title = filler + " by " + globalData.leaves[f].by;
+                event.start = new Date(globalData.leaves[f].date);
+                event.color = color;
+                event.active = true;
+                event.allDay = true;
+                calEvents.push(event);
+                console.log(calEvents);
+            }
+        }
+    }
+
+
+
+    var calendar = $('#calendar').fullCalendar({
+        aspectRatio: 2.2,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month'
+        },
+
+        events: calEvents,
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end, allDay) {
+            $('#fc_create').click();
+            started = start;
+            ended = end;
+            $(".antosubmit").on("click", function() {
+                var title = $("#leaveType option:selected").val().split('_')[1] + " by " + $("#descr").val();
+                if (end) {
+                    ended = end;
+                }
+                var startDate = new Date(started._d);
+                startDate = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + startDate.getFullYear();
+                categoryClass = $("#event_type").val();
+                if ($("#descr").val()) {
+                    var leave = {};
+                    leave.id = globalData.leaves.length;
+                    leave.type = $("#leaveType option:selected").text();
+                    leave.by = $("#descr").val();
+                    leave.date = startDate;
+                    leave.active = true;
+                    leave.backup = $("#descrb").val();
+                    calendar.fullCalendar('renderEvent', {
+                            id: globalData.leaves.length,
+                            title: title,
+                            start: started,
+                            end: started,
+                            color: $("#leaveType option:selected").val().split('_')[0],
+                            allDay: allDay
+                        },
+                        true // make the event "stick"
+                    );
+                    globalData.leaves.push(leave); 
+                }
+                calendar.fullCalendar('unselect');
+                $("#descr").val("");
+                $("#descrb").val("");
+                $('.antoclose').click();
+
+                return false;
+            });
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+            $('#fc_edit').click();
+            var name = calEvent.title.split(" by ")[1];
+            var val = calEvent.title.split(" by ")[0];
+            var idd = calEvent.id;
+            console.log(calEvent)
+            val = calEvent.color + "_" + val;
+            $("#descr2").val(name);
+            $("#descrb2").val(globalData.leaves[idd].backup);
+            
+            $('#leaveType2 option[value="' + val + '"]').prop('selected', true);
+
+            categoryClass = $("#event_type").val();
+
+            $(".antosubmit2").one("click", function() {
+                calEvent.title = $("#leaveType2 option:selected").val().split('_')[1] + " by " + $("#descr2").val();
+                calEvent.color = $("#leaveType2 option:selected").val().split('_')[0];
+                var leave = {};
+                leave.id = globalData.leaves[idd].id;
+                leave.type = $("#leaveType2 option:selected").text();
+                leave.by = $("#descr2").val();
+                leave.date = globalData.leaves[idd].date;
+                leave.active = globalData.leaves[idd].active;
+                leave.backup = $("#descrb2").val();
+                globalData.leaves[idd] = leave;
+                if ($("#descr2").val() && calEvent.id == idd) {
+                    calendar.fullCalendar('updateEvent', calEvent);
+                }
+                console.log(calEvent);
+                //$("#descr2").val("");
+                $('.antoclose2').click();
+            });
+
+            $(".antodelete2").one("click", function() {
+                globalData.leaves[idd].active = false;
+                if (idd > -1) {
+                    calendar.fullCalendar('removeEvents', idd);
+                }
+                $('.antoclose2').click();
+                console.log(idd);
+                calendar.fullCalendar('unselect');
+                //  $("#descr2").val("");
+            });
+            calendar.fullCalendar('unselect');
+        },
+        editable: true
+    });
+
+</script>
+<!-- /FullCalendar -->

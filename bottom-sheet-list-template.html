@@ -1,0 +1,19 @@
+<md-bottom-sheet class="md-list md-has-header">
+    <md-subheader ng-cloak>Current Actions</md-subheader>
+    <md-content md-autofocus="$index == 2">
+        <md-list flex>
+            <md-list-item class="md-2-line" ng-repeat="item in items" ng-click="listItemClick($index)">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{item.description}}</p>
+                </div>
+                <div class="md-list-item-text" flex="10" layout="column">
+                    <md-button class="md-icon-button md-primary" ng-click = "deleteItem($index)" aria-label="Settings">
+                        <md-icon md-svg-icon="img/icons/delete.svg"></md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-bottom-sheet>

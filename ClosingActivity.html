@@ -1,0 +1,20 @@
+<div layout-gt-sm="row" style="margin-top:0%">
+    <md-input-container>
+        <label>Date</label>
+        <md-datepicker ng-model="activity.closingDate"></md-datepicker>
+    </md-input-container>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+    <md-input-container class="md-block" ng-controller="FrequencyCtrl" flex-gt-sm>
+        <label>Frequency</label>
+        <md-select ng-model="activity.frequency">
+            <md-option ng-repeat="frequency in frequencies" value="{{frequency.abbrev}}">
+                {{frequency.abbrev}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
+<md-input-container class="md-block" style="margin-left:3%">
+    <label>Description</label>
+    <textarea ng-model="activity.closingDescription" md-maxlength="150" rows="3" md-select-on-focus style="resize:none !important;"></textarea>
+</md-input-container>

@@ -1,0 +1,10 @@
+<div layout-gt-sm="row" style="margin-top:0%">
+    <md-input-container>
+        <label>Week</label>
+        <md-datepicker ng-model="activity.snweekDay"  md-date-filter="onlyMondayPredicate"></md-datepicker>
+    </md-input-container>
+</div>
+   <md-input-container class="md-block" style="margin-left:2%">
+    <label>NON-SN Data</label>
+    <textarea ng-model="activity.nonsndata" md-maxlength="150" rows="5" md-select-on-focus style="resize:none !important;"></textarea>
+</md-input-container>

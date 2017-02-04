@@ -1,0 +1,41 @@
+<div layout-gt-sm="row" style="margin-top:0%" ng-controller="OutageRCACtrl">
+    <md-input-container>
+        <label>Date</label>
+        <md-datepicker ng-model="activity.aoDate"></md-datepicker>
+    </md-input-container>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Start Time</label>
+        <input ng-model="activity.aoStartTime">
+    </md-input-container>
+    
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Duration</label>
+        <input ng-model="activity.aoDuration">
+    </md-input-container>
+
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Outage Type</label>
+        <md-select ng-model="activity.aoOutageType">
+            <md-option ng-repeat="option in OutageOptions" value="{{option.options}}">
+                {{option.options}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    
+       <md-input-container class="md-block" flex-gt-sm>
+        <label>RCA Done?</label>
+        <md-select ng-model="activity.aoRca">
+            <md-option ng-repeat="option in RCAOptions" value="{{option.options}}">
+                {{option.options}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    
+</div>
+<md-input-container class="md-block" style="margin-left:2%">
+    <label>Outage Reason</label>
+    <textarea ng-model="activity.aoOutageReason" md-maxlength="150" rows="3" md-select-on-focus style="resize:none !important;"></textarea>
+</md-input-container>

@@ -1,0 +1,43 @@
+<div layout-gt-sm="row" style="margin-top:0%" ng-controller="OutageRCACtrl">
+    <md-input-container>
+        <label>Date</label>
+        <md-datepicker ng-model="activity.aoDate"></md-datepicker>
+    </md-input-container>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Report Type</label>
+        <md-select ng-model="activity.aoOutageType">
+            <md-option ng-repeat="option in OutageOptions" value="{{option.options}}">
+                {{option.options}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Filter Type</label>
+        <md-select ng-model="activity.aoRca">
+            <md-option ng-repeat="option in RCAOptions" value="{{option.options}}">
+                {{option.options}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
+
+<div class="row" style="margin-top:-3%;font-size:0.9em;">
+    <div ng-controller="customTableCtrl as demo">
+        
+        <table ng-table="demo.customConfigParams" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+            <tr ng-repeat="user in $data">
+                <td title="'Application'" filter="{ application: 'text'}" sortable="'application'">
+                    {{user.application}}</td>
+                 <td title="'Module'" filter="{ module: 'text'}" sortable="'module'">
+                    {{user.module}}</td>
+                 <td title="'Month'" filter="{ month: 'text'}" sortable="'month'">
+                    {{user.month}}</td>
+                <td title="'% Completed'" filter="{ completed: 'number'}" sortable="'completed'">
+                    {{user.completed}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

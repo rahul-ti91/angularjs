@@ -1,0 +1,22 @@
+<md-input-container class="md-block" ng-controller="IdeaCtrl" flex-gt-sm style="margin-top:3%;">
+    <label>Idea State</label>
+    <md-select ng-model="activity.ideaState">
+        <md-option ng-repeat="frequency in frequencies" value="{{frequency.abbrev}}">
+            {{frequency.abbrev}}
+        </md-option>
+    </md-select>
+</md-input-container>
+<md-input-container class="md-block">
+<md-input-container class="" style="width:46%">
+    <label>Idea Description</label>
+    <textarea ng-model="activity.ideaDescription" md-maxlength="150" rows="3" md-select-on-focus style="resize:none !important;"></textarea>
+</md-input-container>
+<md-input-container class="" style="width:46%; margin-left:5%">
+    <label>Business Benefits</label>
+    <textarea ng-model="activity.businessBenefits" md-maxlength="150" rows="3" md-select-on-focus style="resize:none !important;"></textarea>
+</md-input-container>
+</md-input-container>
+<md-input-container class="md-block" style="">
+    <label>Implementation Plan</label>
+    <textarea ng-model="activity.implementationPlan" md-maxlength="150" rows="2" md-select-on-focus style="resize:none !important;"></textarea>
+</md-input-container>

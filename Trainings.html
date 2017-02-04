@@ -1,0 +1,40 @@
+<md-content class="md-padding" layout="column">
+    <md-chips ng-model="selectedAssociates" md-autocomplete-snap
+              md-transform-chip="transformChip($chip)"
+              md-require-match="autocompleteDemoRequireMatch">
+      <md-autocomplete
+          md-selected-item="selectedItem"
+          md-search-text="searchText"
+          md-items="item in querySearch(searchText)"
+          md-item-text="item.name"
+          placeholder="Search for Associate">
+        <span md-highlight-text="searchText">{{item.name}}  ({{item.empid}})</span>
+      </md-autocomplete>
+      <md-chip-template>
+        <span>
+          <strong>{{$chip.name}}</strong>
+          <em>({{$chip.empid}})</em>
+        </span>
+      </md-chip-template>
+    </md-chips>
+  </md-content>
+
+<div layout-gt-sm="row" class="md-padding" style="margin-top:3%">
+    <md-input-container class="md-block" ng-controller="TrainingCtrl" flex-gt-sm style="margin-right:2%">
+        <label>Training Type</label>
+        <md-select ng-model="activity.trainingType">
+            <md-option ng-repeat="frequency in frequencies" value="{{frequency.abbrev}}">
+                {{frequency.abbrev}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    
+        <md-input-container class="md-block" flex-gt-sm style="margin-left:2%">
+        <label>Name of Training</label>
+        <input ng-model="activity.trainingName">
+    </md-input-container>
+</div>
+
+
+
+

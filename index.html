@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet"; href="https://unpkg.com/ng-table/bundles/ng-table.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/fullcalendar.min.css" rel="stylesheet">
+    <link href="css/fullcalendar.print.css" rel="stylesheet" media="print">
+    <!-- Custom Theme Style -->
+    <link href="css/custom.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="js/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="js/nprogress.js"></script>
+    <!-- ECharts -->
+    <script src="js/echarts.min.js"></script>
+    <!-- Calendar -->
+    <script src="js/moment.min.js"></script>
+    <script src="js/fullcalendar.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="js/custom.min.js"></script>
+    
+</head>
+
+<body ng-app="BlankApp" ng-cloak>
+    <!-- Angular Material requires Angular.js Libraries -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+    <!-- Custom Modules -->
+    <script src="sideNav.js"></script>
+    <script src="autoComplete.js"></script>
+    <script src="FAB.js"></script>
+    <script src="bottomsheet.js"></script>
+    <!-- Your application bootstrap  -->
+   
+    <script src="app.js"></script>
+
+    <div ng-controller="AppCtrl" id="maindiv" layout="column" ng-cloak>
+        <md-toolbar class="md-theme-indigo">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button md-primary" aria-label="Settings">
+                    <md-icon md-svg-src="img/icons/menu.svg" ng-click="toggleLeft()"></md-icon>
+                </md-button>
+                <h2 class="md-flex">MS-CORES MSR Manager</h2> </div>
+        </md-toolbar>
+        <section layout="row" flex>
+            <md-sidenav style="width:304px;" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+                <md-content layout-padding ng-controller="LeftCtrl">
+                    <md-list ng-controller="ListCtrl" ng-cloak>
+                        <div ng-controller="DemoCtrl as ctrl" layout="column" ng-cloak style="margin-top:-4%" ng-include src="'SliderContent.html'"> </div>
+                        <md-list-item ng-repeat="topping in toppings" ng-click="redirector(topping.url, topping.name)">
+                            <p> {{ topping.name }} </p>
+                            <md-checkbox class="md-secondary" ng-disabled="true" ng-model="topping.wanted"></md-checkbox>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+            <md-content flex layout-padding>
+                <md-whiteframe class="md-whiteframe-4dp" flex-sm="100" flex-gt-sm="100" flex-gt-md="100" layout layout-align="center center" style="margin-top:1%;height:6.2%"> <span><b><h4>{{heading}}</h4></b></span> </md-whiteframe>
+                <md-whiteframe class="md-whiteframe-4dp" flex-sm="100" flex-gt-sm="100" flex-gt-md="100" layout layout-align="" style="margin-top:1%;height:79%">
+                    <div layout="column" ng-cloak class="" style="margin-left:0%;width:100%;">
+                        <div ng-view style="padding-left:2%"></div>
+                        <div ng-controller="BottomSheet" flex="40%" layout="row" layout-align="center end" class="">
+                            <div class="bottom-sheet-demo inset" layout-align="center" ng-if="(heading != 'Dashboard') && (heading != 'Leave Calendar') && (heading != 'Reports')">
+                                <md-button class="md-primary md-raised" ng-click="showListBottomSheet()">Current Actions</md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="(heading != 'Dashboard') && (heading != 'Leave Calendar') && (heading != 'Reports')" ng-include src="'FAB.html'" layout="column" layout-align="end end"></div>
+                </md-whiteframe>
+            </md-content>
+        </section>
+    </div>
+</body>
+</html>
