@@ -7,7 +7,7 @@
             this.applicationName = "";
         });
 
-    function DemoCtrl($timeout, $q, $log, AppService) {
+    function DemoCtrl($timeout, $q, $log, $mdSidenav, AppService) {
         var self = this;
 
         self.simulateQuery = false;
@@ -54,6 +54,10 @@
         function selectedItemChange(item) {
             $log.info('Item changed to ' + JSON.stringify(item));
             AppService.applicationName = item.display;
+             $mdSidenav('left').close()
+                .then(function () {
+                    $log.debug("close LEFT is done");
+                });
         }
 
         /**
