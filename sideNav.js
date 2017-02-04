@@ -57,6 +57,68 @@ angular
         month:"October",
         completed:65
     }];
+        }else if(reportType == "testReport"){
+           return [{
+        application: "Application 1",
+        module: "Leaves",
+        month:"October",
+        completed:100,
+        testParam: Math.random()
+    },{
+        application: "Application 2",
+        module: "MSR",
+        month:"October",
+        completed:50,
+        testParam: Math.random()
+    },{
+        application: "Application 3",
+        module: "MSR",
+        month:"October",
+        completed:45,
+        testParam: Math.random()
+    },{
+        application: "Application 4",
+        module: "Leaves",
+        month:"October",
+        completed:80,
+        testParam: Math.random()
+    },{
+        application: "Application 5",
+        module: "Highlights",
+        month:"October",
+        completed:100,
+        testParam: Math.random()
+    },{
+        application: "Application 6",
+        module: "Leaves",
+        month:"October",
+        completed:0,
+        testParam: Math.random()
+    },{
+        application: "Application 7",
+        module: "Highlights",
+        month:"October",
+        completed:11,
+        testParam: Math.random()
+    },{
+        application: "Application 8",
+        module: "Highlights",
+        month:"October",
+        completed:65,
+        testParam: Math.random()
+    },{
+        application: "Application 9",
+        module: "NON-SN Data",
+        month:"October",
+        completed:65,
+        testParam: Math.random()
+    },{
+        application: "Application 10",
+        module: "MSR",
+        month:"October",
+        completed:65,
+        testParam: Math.random()
+    }]; 
         }
     }
     })
@@ -494,13 +556,21 @@ demoController.$inject = ["NgTableParams", "ReportService"];
 
 function demoController(NgTableParams, ReportService) {
     var self = this;
-    var data = ReportService.getReportData("completionStatus");
-   
+       
     //self.tableParams = new NgTableParams({}, {
     //    dataset: data
     //});
+    this.reportFilter = 1;
+    if(0){
+     var data = ReportService.getReportData("completionStatus");
+     self.customConfigParams = createUsingFullOptions(); 
+    }else{
+     var data = ReportService.getReportData("testReport");
+     this.reportFilter = 2;
+     self.testConfigParams = createUsingFullOptions();   
+    }
     
-     self.customConfigParams = createUsingFullOptions();
+     //self.customConfigParams = createUsingFullOptions();
 
     function createUsingFullOptions() {
       var initialParams = {

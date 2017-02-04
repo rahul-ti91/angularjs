@@ -27,7 +27,7 @@
 <div class="row" style="margin-top:-3%;font-size:0.9em;">
     <div ng-controller="customTableCtrl as demo">
         
-        <table ng-table="demo.customConfigParams" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+        <table ng-table="demo.customConfigParams" class="table" show-filter="true" ng-show="demo.reportFilter == 1" style="font-size:1em;margin-bottom:0px;">
             <tr ng-repeat="user in $data">
                 <td title="'Application'" filter="{ application: 'text'}" sortable="'application'">
                     {{user.application}}</td>
@@ -39,5 +39,21 @@
                     {{user.completed}}</td>
             </tr>
         </table>
+        
+         <table ng-table="demo.testConfigParams" class="table" show-filter="true" ng-show="demo.reportFilter == 2" style="font-size:1em;margin-bottom:0px;">
+            <tr ng-repeat="user in $data">
+                <td title="'Application'" filter="{ application: 'text'}" sortable="'application'">
+                    {{user.application}}</td>
+                 <td title="'Module Test'" filter="{ module: 'text'}" sortable="'module'">
+                    {{user.module}}</td>
+                 <td title="'Month'" filter="{ month: 'text'}" sortable="'month'">
+                    {{user.month}}</td>
+                <td title="'% Completed'" filter="{ completed: 'number'}" sortable="'completed'">
+                    {{user.completed}}</td>
+                 <td title="'TestParam'" filter="{ completed: 'number'}" sortable="'testParam'">
+                    {{user.testParam}}</td>
+            </tr>
+        </table>
+        
     </div>
 </div>
