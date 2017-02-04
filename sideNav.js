@@ -3,6 +3,63 @@ angular
     .service("DataService", function () {
         this.data = [];
     })
+    .service("ReportService", function(){
+    this.getReportData = function(reportType){
+        if(reportType == "completionStatus"){
+            return [{
+        application: "Application 1",
+        module: "Leaves",
+        month:"October",
+        completed:100
+    },{
+        application: "Application 2",
+        module: "MSR",
+        month:"October",
+        completed:50
+    },{
+        application: "Application 3",
+        module: "MSR",
+        month:"October",
+        completed:45
+    },{
+        application: "Application 4",
+        module: "Leaves",
+        month:"October",
+        completed:80
+    },{
+        application: "Application 5",
+        module: "Highlights",
+        month:"October",
+        completed:100
+    },{
+        application: "Application 6",
+        module: "Leaves",
+        month:"October",
+        completed:0
+    },{
+        application: "Application 7",
+        module: "Highlights",
+        month:"October",
+        completed:11
+    },{
+        application: "Application 8",
+        module: "Highlights",
+        month:"October",
+        completed:65
+    },{
+        application: "Application 9",
+        module: "NON-SN Data",
+        month:"October",
+        completed:65
+    },{
+        application: "Application 10",
+        module: "MSR",
+        month:"October",
+        completed:65
+    }];
+        }
+    }
+    })
     .controller('AppCtrl', function ($scope, $timeout, $rootScope, $mdSidenav,$q, $log, $rootScope, $mdToast, AppService, DataService) {
         $scope.toggleLeft = buildDelayedToggler('left');
         $scope.appName = AppService.applicationName;
@@ -433,61 +490,11 @@ angular
     })
 .controller("customTableCtrl", demoController)
 
-demoController.$inject = ["NgTableParams"];
+demoController.$inject = ["NgTableParams", "ReportService"];
 
-function demoController(NgTableParams) {
+function demoController(NgTableParams, ReportService) {
     var self = this;
-    var data = [{
-        application: "Application 1",
-        module: "Leaves",
-        month:"October",
-        completed:100
-    },{
-        application: "Application 2",
-        module: "MSR",
-        month:"October",
-        completed:50
-    },{
-        application: "Application 3",
-        module: "MSR",
-        month:"October",
-        completed:45
-    },{
-        application: "Application 4",
-        module: "Leaves",
-        month:"October",
-        completed:80
-    },{
-        application: "Application 5",
-        module: "Highlights",
-        month:"October",
-        completed:100
-    },{
-        application: "Application 6",
-        module: "Leaves",
-        month:"October",
-        completed:0
-    },{
-        application: "Application 7",
-        module: "Highlights",
-        month:"October",
-        completed:11
-    },{
-        application: "Application 8",
-        module: "Highlights",
-        month:"October",
-        completed:65
-    },{
-        application: "Application 9",
-        module: "NON-SN Data",
-        month:"October",
-        completed:65
-    },{
-        application: "Application 10",
-        module: "MSR",
-        month:"October",
-        completed:65
-    }];
+    var data = ReportService.getReportData("completionStatus");
    
     //self.tableParams = new NgTableParams({}, {
     //    dataset: data
