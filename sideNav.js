@@ -54,68 +54,6 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 , month: "October"
                 , completed: 65
     }];
-        }else if(reportType == "testReport"){
-           return [{
-        application: "Application 1",
-        module: "Leaves",
-        month:"October",
-        completed:100,
-        testParam: Math.random()
-    },{
-        application: "Application 2",
-        module: "MSR",
-        month:"October",
-        completed:50,
-        testParam: Math.random()
-    },{
-        application: "Application 3",
-        module: "MSR",
-        month:"October",
-        completed:45,
-        testParam: Math.random()
-    },{
-        application: "Application 4",
-        module: "Leaves",
-        month:"October",
-        completed:80,
-        testParam: Math.random()
-    },{
-        application: "Application 5",
-        module: "Highlights",
-        month:"October",
-        completed:100,
-        testParam: Math.random()
-    },{
-        application: "Application 6",
-        module: "Leaves",
-        month:"October",
-        completed:0,
-        testParam: Math.random()
-    },{
-        application: "Application 7",
-        module: "Highlights",
-        month:"October",
-        completed:11,
-        testParam: Math.random()
-    },{
-        application: "Application 8",
-        module: "Highlights",
-        month:"October",
-        completed:65,
-        testParam: Math.random()
-    },{
-        application: "Application 9",
-        module: "NON-SN Data",
-        month:"October",
-        completed:65,
-        testParam: Math.random()
-    },{
-        application: "Application 10",
-        module: "MSR",
-        month:"October",
-        completed:65,
-        testParam: Math.random()
-    }]; 
         }
     }
 }).controller('AppCtrl', function ($scope, $timeout, $rootScope, $mdSidenav, $q, $log, $rootScope, $mdToast, AppService, DataService, commonService, baseURL) {
@@ -479,17 +417,6 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
             , wanted: false
             , url: $rootScope.hashes[0]
             }
-<<<<<<< HEAD
-  ];
-        $scope.redirector = function (url, name) {
-            if (window.location.hash.substring(2) != url.substring(1)) {
-                console.log(window.location.hash.substring(2) + "  " + url.substring(1));
-                window.location.hash = url;
-                $mdSidenav('left').close()
-                .then(function () {
-                    //$log.debug("close LEFT is done");
-                });
-=======
         , {
             name: 'Application Outages'
             , wanted: false
@@ -509,7 +436,6 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
             name: 'Ideas Proposed/Implemented'
             , wanted: false
             , url: $rootScope.hashes[4]
->>>>>>> master
             }
         , {
             name: 'Trainings & Certifications'
@@ -592,29 +518,11 @@ demoController.$inject = ["NgTableParams", "ReportService"];
 
 function demoController(NgTableParams, ReportService) {
     var self = this;
-<<<<<<< HEAD
-       
-    //self.tableParams = new NgTableParams({}, {
-    //    dataset: data
-    //});
-    this.reportFilter = 1;
-    if(0){
-     var data = ReportService.getReportData("completionStatus");
-     self.customConfigParams = createUsingFullOptions(); 
-    }else{
-     var data = ReportService.getReportData("testReport");
-     this.reportFilter = 2;
-     self.testConfigParams = createUsingFullOptions();   
-    }
-    
-     //self.customConfigParams = createUsingFullOptions();
-=======
     var data = ReportService.getReportData("completionStatus");
     //self.tableParams = new NgTableParams({}, {
     //    dataset: data
     //});
     self.customConfigParams = createUsingFullOptions();
->>>>>>> master
 
     function createUsingFullOptions() {
         var initialParams = {

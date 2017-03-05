@@ -8,11 +8,7 @@
         this.getId = function(){return id;};
     });
 
-<<<<<<< HEAD
-    function DemoCtrl($timeout, $q, $log, $mdSidenav, AppService) {
-=======
     function DemoCtrl($timeout, $q, $log, AppService, commonService, baseURL) {
->>>>>>> master
         var self = this;
         self.simulateQuery = false;
         self.isDisabled = false;
@@ -55,13 +51,6 @@
 
         function selectedItemChange(item) {
             $log.info('Item changed to ' + JSON.stringify(item));
-<<<<<<< HEAD
-            AppService.applicationName = item.display;
-             $mdSidenav('left').close()
-                .then(function () {
-                    $log.debug("close LEFT is done");
-                });
-=======
             if (item != undefined) {
                 AppService.setApplicationName(item.display);
                 AppService.setId(item.value);
@@ -71,7 +60,6 @@
                 AppService.setId("");
             }
             //console.log(AppService);
->>>>>>> master
         }
         /**
          * Build `states` list of key/value pairs
