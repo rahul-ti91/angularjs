@@ -4,11 +4,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="x_panel">
-
                     <div class="x_content">
-
                         <div id='calendar'></div>
-
                     </div>
                 </div>
             </div>
@@ -16,17 +13,13 @@
     </div>
 </div>
 <!-- /page content -->
-
-
 <!-- calendar modal -->
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">New Leave Entry</h4>
-            </div>
+                <h4 class="modal-title" id="myModalLabel">New Leave Entry</h4> </div>
             <div class="modal-body">
                 <div id="testmodal" style="padding: 5px 20px;">
                     <form id="antoform" class="form-horizontal calender" role="form">
@@ -34,22 +27,20 @@
                             <label class="col-sm-3 control-label">Leave Type</label>
                             <div class="col-sm-9">
                                 <select class="form-control" id="leaveType" name="leaveType">
-                        <option value="_PL">Planned Leave</option>
-                        <option value="#F57C00_Compoff">Compoff</option>
-                      </select>
+                                    <option value="_PL">Planned Leave</option>
+                                    <option value="#F57C00_Compoff">Compoff</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Associate Name</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" id="descr" name="descr" />
-                            </div>
+                                <input class="form-control" type="text" id="descr" name="descr" /> </div>
                         </div>
-                          <div class="form-group">
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Backup Associate</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" id="descrb" name="descrb" />
-                            </div>
+                                <input class="form-control" type="text" id="descrb" name="descrb" /> </div>
                         </div>
                     </form>
                 </div>
@@ -64,35 +55,30 @@
 <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel2">Edit Leave Entry</h4>
-            </div>
+                <h4 class="modal-title" id="myModalLabel2">Edit Leave Entry</h4> </div>
             <div class="modal-body">
-
                 <div id="testmodal2" style="padding: 5px 20px;">
                     <form id="antoform2" class="form-horizontal calender" role="form">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Leave Type</label>
                             <div class="col-sm-9">
                                 <select class="form-control" id="leaveType2" name="title2">
-                        <option value="_PL">Planned Leave</option>
-                        <option value="#F57C00_Compoff">Compoff</option>
-                      </select>
+                                    <option value="_PL">Planned Leave</option>
+                                    <option value="#F57C00_Compoff">Compoff</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Associate Name</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" id="descr2" name="descr2" />
-                            </div>
+                                <input class="form-control" type="text" id="descr2" name="descr2" /> </div>
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Backup Associate</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" id="descrb2" name="descrb2" />
-                            </div>
+                                <input class="form-control" type="text" id="descrb2" name="descrb2" /> </div>
                         </div>
                     </form>
                 </div>
@@ -105,21 +91,16 @@
         </div>
     </div>
 </div>
-
 <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
 <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
 <!-- /calendar modal -->
-
-
 <!-- FullCalendar -->
 <script>
-    var date = new Date(),
-        d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear(),
-        started,
-        categoryClass;
-
+    var date = new Date()
+        , d = date.getDate()
+        , m = date.getMonth()
+        , y = date.getFullYear()
+        , started, categoryClass;
     calEvents = [];
     if (globalData.leaves.length > 0) {
         for (f = 0; f < globalData.leaves.length; f++) {
@@ -129,7 +110,8 @@
                 if (globalData.leaves[f].type == "Planned Leave") {
                     filler = "PL";
                     color = "";
-                } else {
+                }
+                else {
                     filler = "Compoff";
                     color = "#F57C00"
                 }
@@ -145,25 +127,21 @@
             }
         }
     }
-
-
-
     var calendar = $('#calendar').fullCalendar({
-        aspectRatio: 2.2,
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month'
-        },
-
-        events: calEvents,
-        selectable: true,
-        selectHelper: true,
-        select: function(start, end, allDay) {
+        aspectRatio: 2.2
+        , header: {
+            left: 'prev,next today'
+            , center: 'title'
+            , right: 'month'
+        }
+        , events: calEvents
+        , selectable: true
+        , selectHelper: true
+        , select: function (start, end, allDay) {
             $('#fc_create').click();
             started = start;
             ended = end;
-            $(".antosubmit").on("click", function() {
+            $(".antosubmit").on("click", function () {
                 var title = $("#leaveType option:selected").val().split('_')[1] + " by " + $("#descr").val();
                 if (end) {
                     ended = end;
@@ -173,33 +151,62 @@
                 categoryClass = $("#event_type").val();
                 if ($("#descr").val()) {
                     var leave = {};
-                    leave.id = globalData.leaves.length;
                     leave.type = $("#leaveType option:selected").text();
                     leave.by = $("#descr").val();
                     leave.date = startDate;
                     leave.active = true;
                     leave.backup = $("#descrb").val();
-                    calendar.fullCalendar('renderEvent', {
-                            id: globalData.leaves.length,
-                            title: title,
-                            start: started,
-                            end: started,
-                            color: $("#leaveType option:selected").val().split('_')[0],
-                            allDay: allDay
-                        },
-                        true // make the event "stick"
-                    );
-                    globalData.leaves.push(leave); 
+                    var leavedata = {};
+                    localStorage.getItem("AppName");
+                    localStorage.getItem("AppId");
+                    leavedata.applicationName = localStorage.getItem("AppName");
+                    leavedata.applicationId = localStorage.getItem("AppId");
+                    leavedata.associate = leave.by;
+                    leavedata.leaveEndDate = started._d;
+                    leavedata.leaveStartDate = started._d;
+                    leavedata.backup = leave.backup;
+                    leavedata.leaveType = leave.type
+                    if ($("#input-0").val() == "") {
+                        console.log(leavedata.applicationName + "  " + leavedata.applicationId);
+                        alert("Please Select a Application");
+                    }
+                    else {
+                        console.log("Have App Name");
+                        $.ajax({
+                            url: "https://cores-msr-jpa.run.aws-usw02-pr.ice.predix.io/leavecalendar"
+                            , data: $.param(leavedata || '')
+                            , type: "POST"
+                            , headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            }
+                            , error: function (response) {
+                                console.log(response)
+                            }
+                            , success: function (response) {
+                                console.log(response);
+                                leave.id = response;
+                                globalData.leaves.push(leave);
+                                calendar.fullCalendar('renderEvent', {
+                                        id: response
+                                        , title: title
+                                        , start: started
+                                        , end: started
+                                        , color: $("#leaveType option:selected").val().split('_')[0]
+                                        , allDay: allDay
+                                    }, true // make the event "stick"
+                                );
+                            }
+                        });
+                    }
                 }
                 calendar.fullCalendar('unselect');
                 $("#descr").val("");
                 $("#descrb").val("");
                 $('.antoclose').click();
-
                 return false;
             });
-        },
-        eventClick: function(calEvent, jsEvent, view) {
+        }
+        , eventClick: function (calEvent, jsEvent, view) {
             $('#fc_edit').click();
             var name = calEvent.title.split(" by ")[1];
             var val = calEvent.title.split(" by ")[0];
@@ -207,23 +214,23 @@
             console.log(calEvent)
             val = calEvent.color + "_" + val;
             $("#descr2").val(name);
-            $("#descrb2").val(globalData.leaves[idd].backup);
-            
+            var ldata = globalData.leaves.filter(function (val) {
+                return val.id == calEvent.id
+            })[0];
+            $("#descrb2").val(ldata.backup);
             $('#leaveType2 option[value="' + val + '"]').prop('selected', true);
-
             categoryClass = $("#event_type").val();
-
-            $(".antosubmit2").one("click", function() {
+            $(".antosubmit2").one("click", function () {
                 calEvent.title = $("#leaveType2 option:selected").val().split('_')[1] + " by " + $("#descr2").val();
                 calEvent.color = $("#leaveType2 option:selected").val().split('_')[0];
                 var leave = {};
-                leave.id = globalData.leaves[idd].id;
+                leave.id = ldata.id;
                 leave.type = $("#leaveType2 option:selected").text();
                 leave.by = $("#descr2").val();
-                leave.date = globalData.leaves[idd].date;
-                leave.active = globalData.leaves[idd].active;
+                leave.date = ldata.date;
+                leave.active = ldata.active;
                 leave.backup = $("#descrb2").val();
-                globalData.leaves[idd] = leave;
+                ldata = leave;
                 if ($("#descr2").val() && calEvent.id == idd) {
                     calendar.fullCalendar('updateEvent', calEvent);
                 }
@@ -231,8 +238,7 @@
                 //$("#descr2").val("");
                 $('.antoclose2').click();
             });
-
-            $(".antodelete2").one("click", function() {
+            $(".antodelete2").one("click", function () {
                 globalData.leaves[idd].active = false;
                 if (idd > -1) {
                     calendar.fullCalendar('removeEvents', idd);
@@ -243,14 +249,25 @@
                 //  $("#descr2").val("");
             });
             calendar.fullCalendar('unselect');
-        },
-        editable: true,
-         eventDrop: function(event, delta, revertFunc) {
-        console.log(event);     
-        globalData.leaves[event.id].date = "" + event.start;     
-        console.log(event.title + " was dropped on " + event.start);
-    }
+        }
+        , editable: true
+        , eventDrop: function (event, delta, revertFunc) {
+            console.log(event);
+            $.ajax({
+                url: "https://cores-msr-jpa.run.aws-usw02-pr.ice.predix.io/leavedate/" + event.id
+                , data: JSON.stringify(event.start._d)
+                , type: "PUT"
+                , headers: {
+                    "Content-Type": "application/json"
+                }
+                , error: function (response) {
+                    console.log(response)
+                }
+                , success: function (response) {
+                    console.log(response);
+                }
+            });
+        }
     });
-
 </script>
 <!-- /FullCalendar -->

@@ -63,10 +63,14 @@
             if (item != undefined) {
                 AppService.setApplicationName(item.display);
                 AppService.setId(item.value);
+                localStorage.setItem("AppName", item.display);
+                localStorage.setItem("AppId", item.value);
             }
             else {
                 AppService.setApplicationName("");
                 AppService.setId("");
+                localStorage.setItem("AppName", "");
+                localStorage.setItem("AppId", "");
             }
             //console.log(AppService);
         }
