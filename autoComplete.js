@@ -1,11 +1,20 @@
 (function () {
     'use strict';
     angular.module('autocompleteDemo', ['ngMaterial', 'commonServiceModule']).controller('DemoCtrl', DemoCtrl).service("AppService", function () {
-        var applicationName = "", id = "";
-        this.setApplicationName = function(name){applicationName = name;};
-        this.getApplicationName = function(){return applicationName;};
-        this.setId = function(val){id = val;};
-        this.getId = function(){return id;};
+        var applicationName = ""
+            , id = "";
+        this.setApplicationName = function (name) {
+            applicationName = name;
+        };
+        this.getApplicationName = function () {
+            return applicationName;
+        };
+        this.setId = function (val) {
+            id = val;
+        };
+        this.getId = function () {
+            return id;
+        };
     });
 
     function DemoCtrl($timeout, $q, $log, AppService, commonService, baseURL) {
