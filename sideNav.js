@@ -1,59 +1,34 @@
 angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'commonServiceModule']).service("DataService", function () {
     this.data = [];
-}).service("ReportService", function () {
+}).service("ReportService", function ($http, $q) {
+
+    var MSRURL = "https://cores-msr-jpa.run.aws-usw02-pr.ice.predix.io/report?month=3";
+    var result = [];
+
     this.getReportData = function (reportType) {
         if (reportType == "completionStatus") {
-            return [{
-                application: "Application 1"
-                , module: "Leaves"
-                , month: "October"
-                , completed: 100
-    }, {
-                application: "Application 2"
-                , module: "MSR"
-                , month: "October"
-                , completed: 50
-    }, {
-                application: "Application 3"
-                , module: "MSR"
-                , month: "October"
-                , completed: 45
-    }, {
-                application: "Application 4"
-                , module: "Leaves"
-                , month: "October"
-                , completed: 80
-    }, {
-                application: "Application 5"
-                , module: "Highlights"
-                , month: "October"
-                , completed: 100
-    }, {
-                application: "Application 6"
-                , module: "Leaves"
-                , month: "October"
-                , completed: 0
-    }, {
-                application: "Application 7"
-                , module: "Highlights"
-                , month: "October"
-                , completed: 11
-    }, {
-                application: "Application 8"
-                , module: "Highlights"
-                , month: "October"
-                , completed: 65
-    }, {
-                application: "Application 9"
-                , module: "NON-SN Data"
-                , month: "October"
-                , completed: 65
-    }, {
-                application: "Application 10"
-                , module: "MSR"
-                , month: "October"
-                , completed: 65
-    }];
+            var defer = $q.defer();
+            $http.get(MSRURL).success(function (res) {
+                for (var d = 0; d < Object.keys(res).length; d++) {
+                    console.log(res[Object.keys(res)[d]].length + "  " + Object.keys(res)[d])
+                    if (res[Object.keys(res)[d]].length > 0) {
+                        for (var f = 0; f < res[Object.keys(res)[d]].length; f++) {
+                            result.push({
+                                application: res[Object.keys(res)[d]][f].applicationName,
+                                module: Object.keys(res)[d],
+                                month: "March",
+                                completed: 100
+                            });
+                        }
+                    }
+                }
+                defer.resolve(result.filter(function (obj, pos, arr) {
+                    return arr.map(mapObj => mapObj["application"] + mapObj["module"]).indexOf(obj["application"] + obj["module"]) === pos;
+                }));
+            }).error(function (response) {
+                defer.reject(response);
+            });
+            return defer.promise;
         }
     }
 }).controller('AppCtrl', function ($scope, $timeout, $rootScope, $mdSidenav, $q, $log, $rootScope, $mdToast, AppService, DataService, commonService, baseURL) {
@@ -69,8 +44,7 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
         var index = ($rootScope.hashes.indexOf("#" + document.location.hash.substring(2)) > -1) ? $rootScope.hashes.indexOf("#" + document.location.hash.substring(2)) : $rootScope.hashes.indexOf("#" + document.location.hash.substring(1));
         if (index > -1) {
             $rootScope.heading = $rootScope.toppings[index].name;
-        }
-        else {
+        } else {
             $rootScope.heading = $rootScope.toppings[0].name;
         }
     });
@@ -81,8 +55,8 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
     function debounce(func, wait, context) {
         var timer;
         return function debounced() {
-            var context = $scope
-                , args = Array.prototype.slice.call(arguments);
+            var context = $scope,
+                args = Array.prototype.slice.call(arguments);
             $timeout.cancel(timer);
             timer = $timeout(function () {
                 timer = undefined;
@@ -135,8 +109,8 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
         }
         // Otherwise, create a new one
         return {
-            name: chip
-            , type: 'new'
+            name: chip,
+            type: 'new'
         }
     }
     /**
@@ -159,24 +133,24 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
     function loadAssociates() {
         var associates = [
             {
-                'name': 'Rahul Tiwari'
-                , 'empid': '5735935'
+                'name': 'Rahul Tiwari',
+                'empid': '5735935'
         }
             , {
-                'name': 'Umesh Mishra'
-                , 'empid': '593928'
+                'name': 'Umesh Mishra',
+                'empid': '593928'
         }
             , {
-                'name': 'Uma Shah'
-                , 'empid': '49847'
+                'name': 'Uma Shah',
+                'empid': '49847'
         }
             , {
-                'name': 'Anshul Kewat'
-                , 'empid': '907878'
+                'name': 'Anshul Kewat',
+                'empid': '907878'
         }
             , {
-                'name': 'Aaroh Aggarwal'
-                , 'empid': '478473'
+                'name': 'Aaroh Aggarwal',
+                'empid': '478473'
         }
       ];
         return associates.map(function (associate) {
@@ -209,10 +183,10 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 $rootScope.toppings[0].wanted = true;
                 var closing = {};
                 globalData.closings.push({
-                    frequency: $scope.activity.frequency
-                    , app: $scope.activity.app
-                    , closingDate: $scope.activity.closingDate
-                    , closingDescription: $scope.activity.closingDescription
+                    frequency: $scope.activity.frequency,
+                    app: $scope.activity.app,
+                    closingDate: $scope.activity.closingDate,
+                    closingDescription: $scope.activity.closingDescription
                 });
                 closing.frequency = $scope.activity.frequency;
                 closing.applicationName = $scope.activity.app;
@@ -221,21 +195,20 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 closing.description = $scope.activity.closingDescription;
                 console.log(commonService.requestMaker((baseURL + "closeactivity"), "POST", closing));
                 closing = {};
-            }
-            else if (document.location.hash == "#/ApplicationOutages") {
+            } else if (document.location.hash == "#/ApplicationOutages") {
                 $scope.activity.module = "ao";
                 $scope.showSimpleToast("Outage has been added successfully!");
                 $rootScope.itemCount[1]++;
                 $rootScope.toppings[1].wanted = true;
                 var outage = {};
                 globalData.outages.push({
-                    aoOutageType: $scope.activity.aoOutageType
-                    , app: $scope.activity.app
-                    , aoDuration: $scope.activity.aoDuration
-                    , aoDate: $scope.activity.aoDate
-                    , aoStartTime: $scope.activity.aoStartTime
-                    , aoRca: $scope.activity.aoRca
-                    , aoOutageReason: $scope.activity.aoOutageReason
+                    aoOutageType: $scope.activity.aoOutageType,
+                    app: $scope.activity.app,
+                    aoDuration: $scope.activity.aoDuration,
+                    aoDate: $scope.activity.aoDate,
+                    aoStartTime: $scope.activity.aoStartTime,
+                    aoRca: $scope.activity.aoRca,
+                    aoOutageReason: $scope.activity.aoOutageReason
                 });
                 outage.outageType = $scope.activity.aoOutageType;
                 outage.applicationName = $scope.activity.app;
@@ -247,17 +220,16 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 outage.outageReason = $scope.activity.aoOutageReason;
                 console.log(commonService.requestMaker((baseURL + "outages"), "POST", outage));
                 outage = {};
-            }
-            else if (document.location.hash == "#/ReleaseAndDRCalendar") {
+            } else if (document.location.hash == "#/ReleaseAndDRCalendar") {
                 $scope.activity.module = "rc";
                 $scope.showSimpleToast("Relese/DR Calendar has been added successfully!");
                 $rootScope.itemCount[2]++;
                 $rootScope.toppings[2].wanted = true;
                 var release = {};
                 globalData.releases.push({
-                    lastreleasedate: $scope.activity.rcLastReleaseDate
-                    , upcomingreleasedate: $scope.activity.rcUpcomingReleaseDate
-                    , app: $scope.activity.app
+                    lastreleasedate: $scope.activity.rcLastReleaseDate,
+                    upcomingreleasedate: $scope.activity.rcUpcomingReleaseDate,
+                    app: $scope.activity.app
                 });
                 release.releaseCompletionDate = $scope.activity.rcLastReleaseDate;
                 release.upcomingReleaseDate = $scope.activity.rcUpcomingReleaseDate;
@@ -269,9 +241,9 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 release = {};
                 var dr = {};
                 globalData.DRs.push({
-                    completiondate: $scope.activity.rcCompletionDate
-                    , planneddate: $scope.activity.rcPlannedDate
-                    , app: $scope.activity.app
+                    completiondate: $scope.activity.rcCompletionDate,
+                    planneddate: $scope.activity.rcPlannedDate,
+                    app: $scope.activity.app
                 });
                 dr.drCompletionDate = $scope.activity.rcCompletionDate;
                 dr.upcomingDRDate = $scope.activity.rcPlannedDate;
@@ -281,16 +253,15 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                     console.log(commonService.requestMaker((baseURL + "drcalendar"), "POST", dr));
                 }
                 dr = {};
-            }
-            else if (document.location.hash == "#/AppreciationsAndChallenges") {
+            } else if (document.location.hash == "#/AppreciationsAndChallenges") {
                 $scope.activity.module = "ac";
                 $scope.showSimpleToast("Appreciation/Challenge has been added successfully!");
                 $rootScope.itemCount[3]++;
                 $rootScope.toppings[3].wanted = true;
                 var appreciation = {};
                 globalData.appreciations.push({
-                    app: $scope.activity.app
-                    , appreciation: $scope.activity.appreciation
+                    app: $scope.activity.app,
+                    appreciation: $scope.activity.appreciation
                 });
                 appreciation.applicationName = $scope.activity.app;
                 appreciation.applicationId = AppService.getId();
@@ -301,8 +272,8 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 appreciation = {};
                 var challenge = {};
                 globalData.challenges.push({
-                    app: $scope.activity.app
-                    , issue: $scope.activity.issue
+                    app: $scope.activity.app,
+                    issue: $scope.activity.issue
                 });
                 challenge.applicationName = $scope.activity.app;
                 challenge.applicationId = AppService.getId();
@@ -311,19 +282,18 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                     console.log(commonService.requestMaker((baseURL + "coresissues"), "POST", challenge));
                 }
                 challenge = {};
-            }
-            else if (document.location.hash == "#/Ideas") {
+            } else if (document.location.hash == "#/Ideas") {
                 $scope.activity.module = "is";
                 $scope.showSimpleToast("Idea has been added successfully!");
                 $rootScope.itemCount[4]++;
                 $rootScope.toppings[4].wanted = true;
                 var idea = {};
                 globalData.ideas.push({
-                    app: $scope.activity.app
-                    , state: $scope.activity.ideaState
-                    , description: $scope.activity.ideaDescription
-                    , benefits: $scope.activity.businessBenefits
-                    , plan: $scope.activity.implementationPlan
+                    app: $scope.activity.app,
+                    state: $scope.activity.ideaState,
+                    description: $scope.activity.ideaDescription,
+                    benefits: $scope.activity.businessBenefits,
+                    plan: $scope.activity.implementationPlan
                 });
                 idea.applicationName = $scope.activity.app;
                 idea.applicationId = AppService.getId();
@@ -333,18 +303,17 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 idea.implamentationPlan = $scope.activity.implementationPlan;
                 console.log(commonService.requestMaker((baseURL + "ideas"), "POST", idea));
                 idea = {};
-            }
-            else if (document.location.hash == "#/Trainings") {
+            } else if (document.location.hash == "#/Trainings") {
                 $scope.activity.module = "tr";
                 $scope.showSimpleToast("Training has been added successfully!");
                 $rootScope.itemCount[5]++;
                 $rootScope.toppings[5].wanted = true;
                 var training = {};
                 globalData.trainings.push({
-                    selectedAssociates: $scope.selectedAssociates
-                    , associatename: $scope.activity.selectedAssociates
-                    , type: $scope.activity.trainingType
-                    , name: $scope.activity.trainingName
+                    selectedAssociates: $scope.selectedAssociates,
+                    associatename: $scope.activity.selectedAssociates,
+                    type: $scope.activity.trainingType,
+                    name: $scope.activity.trainingName
                 });
                 $scope.activity.selectedAssociates = $scope.selectedAssociates;
                 training.trainingType = $scope.activity.trainingType;
@@ -355,16 +324,15 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                     console.log(commonService.requestMaker((baseURL + "trainings"), "POST", training));
                 }
                 training = {};
-            }
-            else if (document.location.hash == '#/Highlights') {
+            } else if (document.location.hash == '#/Highlights') {
                 $scope.activity.module = 'hi';
                 $scope.showSimpleToast("Highlight has been added successfully!");
                 $rootScope.toppings[7].wanted = true;
                 var highlight = {};
                 globalData.highlights.push({
-                    week: $scope.activity.weekDay
-                    , app: $scope.activity.app
-                    , highlight: $scope.activity.highlight
+                    week: $scope.activity.weekDay,
+                    app: $scope.activity.app,
+                    highlight: $scope.activity.highlight
                 });
                 highlight.week = $scope.activity.weekDay;
                 highlight.applicationName = $scope.activity.app;
@@ -372,16 +340,15 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 highlight.highlights = $scope.activity.highlight;
                 console.log(commonService.requestMaker((baseURL + "weeklyhighlights"), "POST", highlight));
                 highlight = {};
-            }
-            else if (document.location.hash == '#/NonSN') {
+            } else if (document.location.hash == '#/NonSN') {
                 $scope.activity.module = 'sn';
                 $scope.showSimpleToast("NON-SN Data has been added successfully!");
                 $rootScope.toppings[6].wanted = true;
                 var nonsn = {};
                 globalData.nonsn.push({
-                    week: $scope.activity.snweekDay
-                    , app: $scope.activity.app
-                    , nonsndata: $scope.activity.nonsndata
+                    week: $scope.activity.snweekDay,
+                    app: $scope.activity.app,
+                    nonsndata: $scope.activity.nonsndata
                 });
                 nonsn.week = $scope.activity.snweekDay;
                 nonsn.applicationName = $scope.activity.app;
@@ -413,60 +380,60 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
 }).controller('ListCtrl', function ($scope, $rootScope, $log, $mdSidenav) {
     $rootScope.toppings = [
         {
-            name: 'Month/Qtr Close Activities'
-            , wanted: false
-            , url: $rootScope.hashes[0]
+            name: 'Month/Qtr Close Activities',
+            wanted: false,
+            url: $rootScope.hashes[0]
             }
         , {
-            name: 'Application Outages'
-            , wanted: false
-            , url: $rootScope.hashes[1]
+            name: 'Application Outages',
+            wanted: false,
+            url: $rootScope.hashes[1]
             }
         , {
-            name: 'Release & DR Calender'
-            , wanted: false
-            , url: $rootScope.hashes[2]
+            name: 'Release & DR Calender',
+            wanted: false,
+            url: $rootScope.hashes[2]
             }
         , {
-            name: 'Appreciations & Challenges'
-            , wanted: false
-            , url: $rootScope.hashes[3]
+            name: 'Appreciations & Challenges',
+            wanted: false,
+            url: $rootScope.hashes[3]
             }
         , {
-            name: 'Ideas Proposed/Implemented'
-            , wanted: false
-            , url: $rootScope.hashes[4]
+            name: 'Ideas Proposed/Implemented',
+            wanted: false,
+            url: $rootScope.hashes[4]
             }
         , {
-            name: 'Trainings & Certifications'
-            , wanted: false
-            , url: $rootScope.hashes[5]
+            name: 'Trainings & Certifications',
+            wanted: false,
+            url: $rootScope.hashes[5]
             }
         , {
-            name: "NON-SN Data"
-            , wanted: false
-            , url: $rootScope.hashes[6]
+            name: "NON-SN Data",
+            wanted: false,
+            url: $rootScope.hashes[6]
             }
         , {
-            name: 'Weekly Highlights'
-            , wanted: false
-            , url: $rootScope.hashes[7]
+            name: 'Weekly Highlights',
+            wanted: false,
+            url: $rootScope.hashes[7]
             }
         , {
-            name: 'Leave Calendar'
-            , wanted: false
-            , url: $rootScope.hashes[8]
+            name: 'Leave Calendar',
+            wanted: false,
+            url: $rootScope.hashes[8]
             }
         , {
-            name: 'Reports'
-            , wanted: false
-            , url: $rootScope.hashes[9]
+            name: 'Reports',
+            wanted: false,
+            url: $rootScope.hashes[9]
             }
-        , {
-            name: 'Dashboard'
-            , wanted: false
-            , url: $rootScope.hashes[10]
-            }
+//        , {
+//            name: 'Dashboard',
+//            wanted: false,
+//            url: $rootScope.hashes[10]
+//            }
   ];
     $scope.redirector = function (url, name) {
         if (window.location.hash.substring(2) != url.substring(1)) {
@@ -513,28 +480,86 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
             abbrev: state
         };
     });
-}).controller("customTableCtrl", demoController)
-demoController.$inject = ["NgTableParams", "ReportService"];
+}).controller('ExampleController15', function ($scope, $http) {
+    $scope.paginatorCallback = paginatorCallback;
+    $scope.getLoadResultsCallback = getLoadResultsCallback;
+    var loadPageCallbackWithDebounce;
+    $scope.$watch('filterText', function () {
+        if (loadPageCallbackWithDebounce) {
+            loadPageCallbackWithDebounce();
+        }
+    });
 
-function demoController(NgTableParams, ReportService) {
+    function getLoadResultsCallback(loadPageCallback) {
+        loadPageCallbackWithDebounce = _.debounce(loadPageCallback, 1000);
+    }
+
+    function paginatorCallback(page, pageSize) {
+        var offset = (page - 1) * pageSize;
+        var query = $scope.filterText ? $scope.filterText : '';
+
+        return $http.post('https://api.nutritionix.com/v1_1/search', {
+            'appId': 'a03ba45f',
+            'appKey': 'b4c78c1472425c13f9ce0e5e45aa1e16',
+            'offset': offset,
+            'limit': pageSize,
+            'query': query + '*',
+            'fields': ['*'],
+            'sort': {
+                'field': 'nf_iron_dv',
+                'order': 'desc'
+            }
+        }).then(function (result) {
+            return {
+                results: result.data.hits,
+                totalResultCount: result.data.total
+            }
+        });
+    }
+}).controller("customTableCtrl", demoController)
+demoController.$inject = ["NgTableParams", "ReportService", "$scope"];
+
+function demoController(NgTableParams, ReportService, $scope) {
     var self = this;
-    var data = ReportService.getReportData("completionStatus");
+    $scope.reportOptions = ('Completed Defaulters').split(' ').map(function (states) {
+        return {
+            options: states
+        };
+    });
+
+    $scope.reportMonths = ('January February March April May June July August September October November December').split(' ').map(function (states) {
+        return {
+            options: states
+        };
+    });
+
+    $scope.reportYears = ('2017 2018 2019 2020').split(' ').map(function (states) {
+        return {
+            options: states
+        };
+    });
+
+    ReportService.getReportData("completionStatus").then(function (data) {
+
+        console.log("from controller", data);
+        self.customConfigParams = createUsingFullOptions();
+
+        function createUsingFullOptions() {
+            var initialParams = {
+                count: 9 // initial page size
+            };
+            var initialSettings = {
+                // page size buttons (right set of buttons in demo)
+                counts: [], // determines the pager buttons (left set of buttons in demo)
+                paginationMaxBlocks: 13,
+                paginationMinBlocks: 2,
+                dataset: data
+            };
+            return new NgTableParams(initialParams, initialSettings);
+        }
+    });
     //self.tableParams = new NgTableParams({}, {
     //    dataset: data
     //});
-    self.customConfigParams = createUsingFullOptions();
 
-    function createUsingFullOptions() {
-        var initialParams = {
-            count: 9 // initial page size
-        };
-        var initialSettings = {
-            // page size buttons (right set of buttons in demo)
-            counts: [], // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13
-            , paginationMinBlocks: 2
-            , dataset: data
-        };
-        return new NgTableParams(initialParams, initialSettings);
-    }
 }
