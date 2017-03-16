@@ -1,123 +1,508 @@
-<div ng-cloak>
+<div ng-cloak ng-controller="customTableCtrl as demo">
     <md-content>
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Reports">
                 <md-content class="md-padding">
-                    <div ng-controller="customTableCtrl as demo">
-                        <div layout-gt-sm="row" style="margin-top:0%">
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Month</label>
-                                <md-select ng-model="report.reportMonth">
-                                    <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
-                                        {{option.options}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
 
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Year</label>
-                                <md-select ng-model="report.reportYear">
-                                    <md-option ng-repeat="option in reportYears" value="{{option.options}}">
-                                        {{option.options}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
 
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Report Type</label>
-                                <md-select ng-model="report.reportType">
-                                    <md-option ng-repeat="option in reportOptions" value="{{option.options}}">
-                                        {{option.options}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Report Type</label>
+                            <md-select ng-model="report.reportType">
+                                <md-option ng-repeat="option in reportOptions" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
 
-                            <md-button class="md-raised md-primary">Download MSR</md-button>
-                            <!--
+                        <md-button class="md-raised md-primary" style="margin-bottom:20px">Download MSR</md-button>
+                        <!--
                             <md-input-container class="md-block" flex-gt-sm>
                                 
                             </md-input-container>
 -->
-                        </div>
-
-                        <div class="row" style="margin-top:0%;font-size:0.9em;">
-
-
-
-                            <table ng-table="demo.customConfigParams" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
-                                <tr ng-repeat="user in $data">
-                                    <td title="'Application'" filter="{ application: 'text'}" sortable="'application'">
-                                        {{user.application}}</td>
-                                    <td title="'Module'" filter="{ module: 'text'}" sortable="'module'">
-                                        {{user.module}}</td>
-                                    <td title="'Month'" filter="{ month: 'text'}" sortable="'month'">
-                                        {{user.month}}</td>
-                                    <td title="'% Completed'" filter="{ completed: 'number'}" sortable="'completed'">
-                                        {{user.completed}}</td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.customConfigParams" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ application: 'text'}" sortable="'application'">
+                                    {{user.application}}</td>
+                                <td title="'Module'" filter="{ module: 'text'}" sortable="'module'">
+                                    {{user.module}}</td>
+                                <td title="'Month'" filter="{ month: 'text'}" sortable="'month'">
+                                    {{user.month}}</td>
+                                <td title="'% Completed'" filter="{ completed: 'number'}" sortable="'completed'">
+                                    {{user.completed}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </md-content>
             </md-tab>
             <md-tab label="Close Activities">
-                <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Two</h1>
 
+                <md-content class="md-padding">
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.closeActivity" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Closing Date'" filter="{ activityDate: 'text'}" sortable="'activityDate'">
+                                    {{user.activityDate}}</td>
+                                <td title="'Frequency'" filter="{ frequency: 'text'}" sortable="'frequency'">
+                                    {{user.frequency}}</td>
+                                <td title="'Description'" filter="{ description: 'text'}" sortable="'description'">
+                                    {{user.description}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Outages">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.outages" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Outage Date'" filter="{ outageDate: 'text'}" sortable="'outageDate'">
+                                    {{user.outageDate}}</td>
+                                <td title="'Start Time'" filter="{ startTime: 'text'}" sortable="'startTime'">
+                                    {{user.startTime}}</td>
+                                <td title="'Duration'" filter="{ duration: 'text'}" sortable="'duration'">
+                                    {{user.duration}}</td>
+                                <td title="'Outage Type'" filter="{ outageType: 'text'}" sortable="'outageType'">
+                                    {{user.outageType}}</td>
+                                <td title="'RCA'" filter="{ rcaDone: 'text'}" sortable="'rcaDone'">
+                                    {{user.rcaDone}}</td>
+                                <td title="'Outage Reason'" filter="{ outageReason: 'text'}" sortable="'outageReason'">
+                                    {{user.outageReason}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
-            <md-tab label="Release & DR Calendar">
+            <md-tab label="Release Calendar">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.releaseCal" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Completion Date'" filter="{ releaseCompletionDate: 'text'}" sortable="'releaseCompletionDate'">
+                                    {{user.releaseCompletionDate}}</td>
+                                <td title="'Upcoming Release Date'" filter="{ upcomingReleaseDate: 'text'}" sortable="'upcomingReleaseDate'">
+                                    {{user.upcomingReleaseDate}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="DR Calendar">
+                <md-content class="md-padding">
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.drCal" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Completion Date'" filter="{ drCompletionDate: 'text'}" sortable="'drCompletionDate'">
+                                    {{user.drCompletionDate}}</td>
+                                <td title="'Upcoming DR Date'" filter="{ upcomingDRDate: 'text'}" sortable="'upcomingDRDate'">
+                                    {{user.upcomingDRDate}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Appreciations">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.appreciations" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Appreciations'" filter="{ appreciation: 'text'}" sortable="'appreciation'">
+                                    {{user.appreciation}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Challenges">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.issues" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Issues'" filter="{ issue: 'text'}" sortable="'issue'">
+                                    {{user.issue}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Ideas">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.ideas" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Idea State'" filter="{ ideaState: 'text'}" sortable="'ideaState'">
+                                    {{user.ideaState}}</td>
+                                <td title="'Description'" filter="{ ideaDescription: 'text'}" sortable="'ideaDescription'">
+                                    {{user.ideaDescription}}</td>
+                                <td title="'Business Benefits'" filter="{ businessBenefits: 'text'}" sortable="'businessBenefits'">
+                                    {{user.businessBenefits}}</td>
+                                <td title="'Implementation Plan'" filter="{ implamentationPlan: 'text'}" sortable="'implamentationPlan'">
+                                    {{user.implamentationPlan}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Trainings">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.trainings" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Emp Id'" filter="{ empId: 'text'}" sortable="'empId'">
+                                    {{user.empId}}</td>
+                                <td title="'Name'" filter="{ empName: 'text'}" sortable="'empName'">
+                                    {{user.empName}}</td>
+                                <td title="'Type'" filter="{ trainingType: 'text'}" sortable="'trainingType'">
+                                    {{user.trainingType}}</td>
+                                <td title="'Training Name'" filter="{ trainingName: 'text'}" sortable="'trainingName'">
+                                    {{user.trainingName}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Non SN">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.nonSN" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Week'" filter="{ week: 'text'}" sortable="'week'">
+                                    {{user.week}}</td>
+                                <td title="'Data'" filter="{ data: 'text'}" sortable="'data'">
+                                    {{user.data}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Weekly Highlights">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.weeklyHighlights" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Week'" filter="{ week: 'text'}" sortable="'week'">
+                                    {{user.week}}</td>
+                                <td title="'Data'" filter="{ highlights: 'text'}" sortable="'highlights'">
+                                    {{user.highlights}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="Leaves">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <div layout-gt-sm="row" style="margin-top:0%">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Month</label>
+                            <md-select ng-model="report.reportMonth">
+                                <md-option ng-repeat="option in reportMonths" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Year</label>
+                            <md-select ng-model="report.reportYear">
+                                <md-option ng-repeat="option in reportYears" value="{{option.options}}">
+                                    {{option.options}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div class="row" style="margin-top:0%;font-size:0.9em;">
+
+                        <table ng-table="demo.leaves" class="table" show-filter="true" style="font-size:1em;margin-bottom:0px;">
+                            <tr ng-repeat="user in $data">
+                                <td title="'Application'" filter="{ applicationName: 'text'}" sortable="'applicationName'">
+                                    {{user.applicationName}}</td>
+                                <td title="'Associate Name'" filter="{ associate: 'text'}" sortable="'associate'">
+                                    {{user.associate}}</td>
+                                <td title="'Start Date'" filter="{ leaveStartDate: 'text'}" sortable="'leaveStartDate'">
+                                    {{user.leaveStartDate}}</td>
+                                <td title="'End Date'" filter="{ leaveEndDate: 'text'}" sortable="'leaveEndDate'">
+                                    {{user.leaveEndDate}}</td>
+                                <td title="'Backup'" filter="{ backup: 'text'}" sortable="'backup'">
+                                    {{user.backup}}</td>
+                                <td title="'Leave Type'" filter="{ leaveType: 'text'}" sortable="'leaveType'">
+                                    {{user.leaveType}}</td>
+                                <td title="'Creation Date'" filter="{ creationDate: 'number'}" sortable="'creationDate'">
+                                    {{user.creationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </md-content>
             </md-tab>
         </md-tabs>

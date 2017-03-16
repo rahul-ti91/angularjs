@@ -4,6 +4,17 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
 
     var MSRURL = "https://cores-msr-jpa.run.aws-usw02-pr.ice.predix.io/report?month=3";
     var result = [];
+    var rawResult;
+
+    function getRawData() {
+        var defer = $q.defer();
+        $http.get(MSRURL).success(function (response) {
+            defer.resolve(response);
+        }).error(function (response) {
+            defer.reject(response);
+        });
+        return defer.promise;
+    }
 
     this.getReportData = function (reportType) {
         if (reportType == "completionStatus") {
@@ -29,6 +40,8 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                 defer.reject(response);
             });
             return defer.promise;
+        } else if (reportType == "closeActivity") {
+            return getRawData();
         }
     }
 }).controller('AppCtrl', function ($scope, $timeout, $rootScope, $mdSidenav, $q, $log, $rootScope, $mdToast, AppService, DataService, commonService, baseURL) {
@@ -540,24 +553,39 @@ function demoController(NgTableParams, ReportService, $scope) {
     });
 
     ReportService.getReportData("completionStatus").then(function (data) {
-
-        console.log("from controller", data);
-        self.customConfigParams = createUsingFullOptions();
-
-        function createUsingFullOptions() {
-            var initialParams = {
-                count: 9 // initial page size
-            };
-            var initialSettings = {
-                // page size buttons (right set of buttons in demo)
-                counts: [], // determines the pager buttons (left set of buttons in demo)
-                paginationMaxBlocks: 13,
-                paginationMinBlocks: 2,
-                dataset: data
-            };
-            return new NgTableParams(initialParams, initialSettings);
-        }
+        self.customConfigParams = createUsingFullOptions(data);
     });
+
+    ReportService.getReportData("closeActivity").then(function (data) {
+        self.closeActivity = createUsingFullOptions(data.closeActivities);
+        self.outages = createUsingFullOptions(data.outages);
+        self.appreciations = createUsingFullOptions(data.appreciations);
+        self.issues = createUsingFullOptions(data.coresIssues);
+        self.ideas = createUsingFullOptions(data.ideas);
+        self.trainings = createUsingFullOptions(data.trainings);
+        self.nonSN = createUsingFullOptions(data.nonsnDatas);
+        self.leaves = createUsingFullOptions(data.leaveCalendars);
+        self.releaseCal = createUsingFullOptions(data.releaseCalendars);
+        self.drCal = createUsingFullOptions(data.drcalendars);
+        self.weeklyHighlights = createUsingFullOptions(data.weeklyHighlights);
+    })
+
+    function createUsingFullOptions(data) {
+        var initialParams = {
+            count: 6 // initial page size
+        };
+        var initialSettings = {
+            // page size buttons (right set of buttons in demo)
+            counts: [], // determines the pager buttons (left set of buttons in demo)
+            paginationMaxBlocks: 13,
+            paginationMinBlocks: 2,
+            dataset: data
+        };
+        return new NgTableParams(initialParams, initialSettings);
+    }
+
+
+
     //self.tableParams = new NgTableParams({}, {
     //    dataset: data
     //});
