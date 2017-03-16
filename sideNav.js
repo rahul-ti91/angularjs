@@ -189,7 +189,7 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
                     return;
                 }
             }
-            if (document.location.hash == "#/ClosingActivity") {
+            if (document.location.hash == "#/ClosingActivity" || document.location.hash == "#/") {
                 $scope.activity.module = "ca";
                 $scope.showSimpleToast("Activity has been added successfully!");
                 $rootScope.itemCount[0]++;
@@ -493,42 +493,6 @@ angular.module('sidenavDemo1', ['ngMaterial', 'autocompleteDemo', 'ngTable', 'co
             abbrev: state
         };
     });
-}).controller('ExampleController15', function ($scope, $http) {
-    $scope.paginatorCallback = paginatorCallback;
-    $scope.getLoadResultsCallback = getLoadResultsCallback;
-    var loadPageCallbackWithDebounce;
-    $scope.$watch('filterText', function () {
-        if (loadPageCallbackWithDebounce) {
-            loadPageCallbackWithDebounce();
-        }
-    });
-
-    function getLoadResultsCallback(loadPageCallback) {
-        loadPageCallbackWithDebounce = _.debounce(loadPageCallback, 1000);
-    }
-
-    function paginatorCallback(page, pageSize) {
-        var offset = (page - 1) * pageSize;
-        var query = $scope.filterText ? $scope.filterText : '';
-
-        return $http.post('https://api.nutritionix.com/v1_1/search', {
-            'appId': 'a03ba45f',
-            'appKey': 'b4c78c1472425c13f9ce0e5e45aa1e16',
-            'offset': offset,
-            'limit': pageSize,
-            'query': query + '*',
-            'fields': ['*'],
-            'sort': {
-                'field': 'nf_iron_dv',
-                'order': 'desc'
-            }
-        }).then(function (result) {
-            return {
-                results: result.data.hits,
-                totalResultCount: result.data.total
-            }
-        });
-    }
 }).controller("customTableCtrl", demoController)
 demoController.$inject = ["NgTableParams", "ReportService", "$scope"];
 
@@ -583,11 +547,5 @@ function demoController(NgTableParams, ReportService, $scope) {
         };
         return new NgTableParams(initialParams, initialSettings);
     }
-
-
-
-    //self.tableParams = new NgTableParams({}, {
-    //    dataset: data
-    //});
 
 }
