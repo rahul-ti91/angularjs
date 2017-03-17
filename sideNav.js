@@ -504,6 +504,11 @@ function demoController(NgTableParams, ReportService, $scope) {
         };
     });
 
+    
+    $scope.downloadMSR = function(){
+        window.location.href = "https://rahul-mscores-exlprov.run.aws-usw02-pr.ice.predix.io/Report?month=3";
+    }
+    
     $scope.reportMonths = ('January February March April May June July August September October November December').split(' ').map(function (states) {
         return {
             options: states
